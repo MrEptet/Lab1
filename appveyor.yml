@@ -8,5 +8,7 @@ install:
   - sh: ./flaskapp/st.sh
  
 build_script:
- - cd flaskapp
- - ./st.sh 
+# - cd flaskapp
+# - ./st.sh 
+- ./flaskapp/st.sh
+
