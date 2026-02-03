@@ -13,6 +13,7 @@ import lxml.etree as ET
 import os
 import sys
 from . import net as neuronet
+import gc
 
 app = Flask(__name__)
 #декоратор для вывода страницы по умолчанию
@@ -80,6 +81,7 @@ def net():
   form.upload.data.save(filename)
  # передаем форму в шаблон, так же передаем имя файла и результат работы нейронной
  # сети, если был нажат сабмит, либо передадим falsy значения
+ gc.collect()
  return render_template('net.html',form=form,image_name=filename,neurodic=neurodic) 
 
 from flask import request
