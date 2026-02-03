@@ -10,6 +10,8 @@ from PIL import Image
 from io import BytesIO
 import json
 import lxml.etree as ET
+import os
+import sys
 
 app = Flask(__name__)
 #декоратор для вывода страницы по умолчанию
@@ -64,8 +66,10 @@ def net():
  # проверяем нажатие сабмит и валидацию введенных данных
  if form.validate_on_submit():
  # файлы с изображениями читаются из каталога static
-  filename = os.path.join('./static', secure_filename(form.upload.data.filename))
-  fcount, fimage = neuronet.read_image_files(10,'./static')
+  base_dir = os.path.dirname(os.path.abspath(__file__))
+        static_path = os.path.join(base_dir, 'static')
+  fcount, fimage = neuronet.read_image_files(10, static_path)
+  filename = os.path.join(static_path, secure_filename(form.upload.data.filename))
  # передаем все изображения в каталоге на классификацию
  # можете изменить немного код и передать только загруженный файл
   decode = neuronet.getresult(fimage)
