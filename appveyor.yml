@@ -10,7 +10,6 @@ install:
 build: off
  
 build_script:
-# - cd flaskapp
-# - ./st.sh 
-- sh: ./flaskapp/st.sh
+  - cd flaskapp
+  - sh: ./st.sh 
 
