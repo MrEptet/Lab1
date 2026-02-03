@@ -41,7 +41,6 @@ def read_image_files(files_max_count,dir_name):
    image_box[file_i] = Image.open(dir_name+'/'+files[file_i]) # / ??
 return files_count, image_box 
  
- print("DEBUG: net.py version 2 loaded with getResult function.") 
  def getResult(image_box):
   files_count = len(image_box)
   images_resized = [[]]*files_count
