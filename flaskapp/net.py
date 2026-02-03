@@ -38,7 +38,11 @@ def read_image_files(files_max_count,dir_name):
    files_count = len(files)
   image_box = [[]]*files_count
   for file_i in range(files_count): # читаем изображения в список
-   image_box[file_i] = Image.open(dir_name+'/'+files[file_i])
+    full_path - os.path.join(dir_name, files[file_i])
+    img = Image.open(full_path)
+    image_bix[file_i] = img
+    ing.close()
+   #image_box[file_i] = Image.open(dir_name+'/'+files[file_i])
   return files_count, image_box
   
 def getResult(image_box):
