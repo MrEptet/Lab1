@@ -6,9 +6,11 @@ install:
   - pip3 install gunicorn
   - sh: chmod +x ./flaskapp/st.sh
   - sh: ./flaskapp/st.sh
+
+build: off
  
 build_script:
 # - cd flaskapp
 # - ./st.sh 
-- ./flaskapp/st.sh
+- sh: ./flaskapp/st.sh
 
