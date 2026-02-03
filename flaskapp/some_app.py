@@ -72,7 +72,7 @@ def net():
   filename = os.path.join(static_path, secure_filename(form.upload.data.filename))
  # передаем все изображения в каталоге на классификацию
  # можете изменить немного код и передать только загруженный файл
-  decode = neuronet.getresult(fimage)
+  decode = neuronet.getResult(fimage)
  # записываем в словарь данные классификации
   for elem in decode:
    neurodic[elem[0][1]] = elem[0][2]
@@ -100,7 +100,7 @@ def apinet():
   cfile = base64.b64decode(filebytes)
   # чтобы считать изображение как файл из памяти, используем BytesIO
   img = Image.open(BytesIO(cfile))
-  decode = neuronet.getresult([img])
+  decode = neuronet.getResult([img])
   neurodic = {}
   for elem in decode:
    neurodic[elem[0][1]] = str(elem[0][2])
