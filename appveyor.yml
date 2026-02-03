@@ -1,8 +1,7 @@
 image:
   - Visual Studio 2019
 
-install:
- - pip3 install flask 
+python.exe -m pip install --upgrade pip
 
 test_script:
   - py ./flaskapp/some_app.py 
