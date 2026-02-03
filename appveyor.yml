@@ -4,4 +4,4 @@ image:
 build: off
 
 test_script:
-  - python3 ./flaskapp/some_app.py 
+  - py ./flaskapp/some_app.py 
