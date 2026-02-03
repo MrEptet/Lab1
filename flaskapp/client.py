@@ -1,5 +1,6 @@
 # импортируем нужные модули
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 from io import BytesIO
 import base64
 img_data = None
