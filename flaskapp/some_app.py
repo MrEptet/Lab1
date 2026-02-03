@@ -11,6 +11,7 @@ from PIL import Image
 from io import BytesIO
 import json
 import lxml.etree as ET
+import requests
 
 app = Flask(__name__)
 #декоратор для вывода страницы по умолчанию
@@ -82,7 +83,6 @@ def net():
 from flask import request
 # метод для обработки запроса от пользователя
 @app.route("/apinet",methods=['GET', 'POST'])
-import requests
 r = requests.get('http://localhost:10000/')
 print(r.status_code)
 print(r.text)
