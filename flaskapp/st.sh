@@ -1,4 +1,4 @@
-gunicorn --bind 127.0.0.1:$PORT wsgi:app & APP_PID=$!
+gunicorn --bind 127.0.0.1:10000 wsgi:app & APP_PID=$!
 sleep 5
 echo start client
 python3 client.py
