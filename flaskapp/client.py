@@ -4,6 +4,13 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 from io import BytesIO
 import base64
 img_data = None
+import requests
+r = requests.get('http://localhost:10000/')
+print(r.status_code)
+print(r.text)
+r = requests.get('http://localhost:10000/data_to')
+print(r.status_code)
+print(r.text) 
 # создаем путь к файлу (для кросс-платформенности, например)
 path = os.path.join('./static','image0008.png')
 # читаем файл и енкодируем его в строку base64
