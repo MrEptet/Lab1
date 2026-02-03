@@ -4,6 +4,7 @@ image:
 install:
   -sh: chmod +x ./flaskapp/st.sh
   -sh: ./flaskapp/st.sh
+install:
   - pip3 install flask
   - pip3 install gunicorn
  
