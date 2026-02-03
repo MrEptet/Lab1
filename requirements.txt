@@ -7,3 +7,4 @@ Pillow==12.1.0
 tensorflow==2.20.0
 Keras==3.13.2
 lxml==6.0.2 
+requests==2.32.5
