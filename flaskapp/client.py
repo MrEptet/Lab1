@@ -14,6 +14,6 @@ with open(path, 'rb') as fh:
 # отправляется на сервер в виде json-строки
 # преобразование делает сама функция отправки запроса post
 jsondata = {'imagebin':b64.decode('utf-8')}
-res = requests.post('http://localhost:5000/apinet', json=jsondata)
+res = requests.post('http://localhost:port/apinet', json=jsondata)
 if res.ok:
  print(res.json()) 
