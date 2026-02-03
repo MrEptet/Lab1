@@ -1,17 +1,19 @@
-image:
-  - Visual Studio 2019
-
 environment:
+  # For Python versions available on Appveyor, see
+  # https://www.appveyor.com/docs/windows-images-software/#python
   matrix:
-  # - TOXENV: py27  # end-of-life-branches
-  # - TOXENV: py37
-  - TOXENV: py38    # https://devguide.python.org/versions
-  - TOXENV: py39
-  - TOXENV: py310
-  - TOXENV: py311
-  - TOXENV: py312
+    - {APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017, PYTHON: "C:\\Python36-x64"}
+    - {APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019, PYTHON: "C:\\Python38-x64"}
+    - {APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019, PYTHON: "C:\\Python39-x64"}
+    - {APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022, PYTHON: "C:\\Python313-x64"}
 
-build: false
+install:
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - "python.exe -m pip install codecov coverage pytest-cov setuptools"
+  - choco install -y swig
+  - python.exe setup.py build_ext --inplace
+
+build: off
 
 test_script:
   - python3 ./flaskapp/some_app.py 
