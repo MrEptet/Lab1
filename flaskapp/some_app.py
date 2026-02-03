@@ -4,8 +4,7 @@ from wtforms import StringField, SubmitField, TextAreaField
 # модули валидации полей формы
 from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from flask import Flask
-from flask import Response
+from flask import Flask, Response, render_template
 import base64
 from PIL import Image
 from io import BytesIO
