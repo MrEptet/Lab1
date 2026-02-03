@@ -80,6 +80,13 @@ from io import BytesIO
 import json
 # метод для обработки запроса от пользователя
 @app.route("/apinet",methods=['GET', 'POST'])
+import requests
+r = requests.get('http://localhost:10000/')
+print(r.status_code)
+print(r.text)
+r = requests.get('http://localhost:10000/data_to')
+print(r.status_code)
+print(r.text) 
 def apinet():
  neurodic = {}
  # проверяем, что в запросе json данные
