@@ -39,7 +39,7 @@ def read_image_files(files_max_count,dir_name):
   image_box = [[]]*files_count
   for file_i in range(files_count): # читаем изображения в список
    image_box[file_i] = Image.open(dir_name+'/'+files[file_i]) # / ??
-  return files_count, image_box 
+return files_count, image_box 
  
  print("DEBUG: net.py version 2 loaded with getResult function.") 
  def getResult(image_box):
