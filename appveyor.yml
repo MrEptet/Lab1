@@ -13,6 +13,5 @@ environment:
 
 build: false
 
-
-script:
+test_script:
   - python3 ./flaskapp/some_app.py 
