@@ -5,14 +5,12 @@ from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask import Flask
-from flask import request
 from flask import Response
 import base64
 from PIL import Image
 from io import BytesIO
 import json
 import lxml.etree as ET
-import requests
 
 app = Flask(__name__)
 #декоратор для вывода страницы по умолчанию
@@ -81,10 +79,10 @@ def net():
  # сети, если был нажат сабмит, либо передадим falsy значения
  return render_template('net.html',form=form,image_name=filename,neurodic=neurodic) 
 
-
+from flask import request
 # метод для обработки запроса от пользователя
 @app.route("/apinet",methods=['GET', 'POST'])
-
+import requests
 r = requests.get('http://localhost:10000/')
 print(r.status_code)
 print(r.text)
