@@ -12,7 +12,7 @@ import json
 import lxml.etree as ET
 import os
 import sys
-from flaskapp import net as neuronet
+from . import net as neuronet
 
 app = Flask(__name__)
 #декоратор для вывода страницы по умолчанию
