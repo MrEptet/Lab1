@@ -32,15 +32,16 @@ input_shape=None, pooling=None, classes=1000)
 # учтите, если там есть файлы, не соответствующие изображениям, или каталоги
 # возникнет ошибка
 def read_image_files(files_max_count,dir_name):
- files = os.listdir(dir_name)
- files_count = files_max_count
- if(files_max_count>len(files)): # определяем количество файлов не больше max
-  files_count = len(files)
- image_box = [[]]*files_count
- for file_i in range(files_count): # читаем изображения в список
-  image_box[file_i] = Image.open(dir_name+'/'+files[file_i]) # / ??
- return files_count, image_box 
+  files = os.listdir(dir_name)
+  files_count = files_max_count
+  if(files_max_count>len(files)): # определяем количество файлов не больше max
+   files_count = len(files)
+  image_box = [[]]*files_count
+  for file_i in range(files_count): # читаем изображения в список
+   image_box[file_i] = Image.open(dir_name+'/'+files[file_i]) # / ??
+  return files_count, image_box 
  
+ print("DEBUG: net.py version 2 loaded with getResult function.") 
  def getResult(image_box):
   files_count = len(image_box)
   images_resized = [[]]*files_count
