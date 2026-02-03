@@ -12,6 +12,7 @@ import json
 import lxml.etree as ET
 import os
 import sys
+from flaskapp import net as neuronet
 
 app = Flask(__name__)
 #декоратор для вывода страницы по умолчанию
@@ -54,7 +55,6 @@ from werkzeug.utils import secure_filename
 import os
 # подключаем наш модуль и переименовываем
 # для исключения конфликта имен
-from . import net as neuronet
 # метод обработки запроса GET и POST от клиента
 @app.route("/net",methods=['GET', 'POST'])
 def net():
