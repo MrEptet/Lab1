@@ -2,10 +2,10 @@ image:
   - Visual Studio 2019
 
 install:
-  -sh: chmod +x ./flaskapp/st.sh
-install:
   - pip3 install flask
   - pip3 install gunicorn
+  - sh: chmod +x ./flaskapp/st.sh
+  - sh: ./flaskapp/st.sh
  
 build_script:
  - cd flaskapp
