@@ -67,7 +67,7 @@ def net():
  if form.validate_on_submit():
  # файлы с изображениями читаются из каталога static
   base_dir = os.path.dirname(os.path.abspath(__file__))
-        static_path = os.path.join(base_dir, 'static')
+  static_path = os.path.join(base_dir, 'static')
   fcount, fimage = neuronet.read_image_files(10, static_path)
   filename = os.path.join(static_path, secure_filename(form.upload.data.filename))
  # передаем все изображения в каталоге на классификацию
