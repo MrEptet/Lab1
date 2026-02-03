@@ -1,5 +1,21 @@
-language: python
-install:
- - pip3 install flask
+# appveyor.yml - https://www.appveyor.com/docs/lang/python
+---
+image:
+  - Visual Studio 2019
+
+environment:
+  matrix:
+  # - TOXENV: py27  # end-of-life-branches
+  # - TOXENV: py37
+  - TOXENV: py38    # https://devguide.python.org/versions
+  - TOXENV: py39
+  - TOXENV: py310
+  - TOXENV: py311
+  - TOXENV: py312
+    TOXENV: ruff
+
+build: false
+
+
 script:
- - python3 ./flaskapp/some_app.py 
+  - python3 ./flaskapp/some_app.py 
