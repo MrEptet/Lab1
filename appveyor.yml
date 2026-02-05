@@ -20,5 +20,4 @@ build_script:
 - sh: ./st.sh
 
 after_build:
-# Убедитесь, что этот URL/ключ зашифрован в настройках AppVeyor
 - curl -X POST https://api.render.com%RENDER_DEPLOYMENT_KEY%
