@@ -17,9 +17,7 @@
 <p>
   <img src="{{ url_for('static', filename=image_url) }}" 
        class="img-rounded"
-       alt="Original Image"
-       width= 224
-       height=224 />
+       alt="Original Image" />
 </p>
 {% else %}
 <p> There is no image yet </p>
@@ -31,9 +29,7 @@
 <p>
   <img src="{{ modified_url }}" 
        class="img-rounded"
-       alt="Modified Image"
-       width= 224
-       height=224 />
+       alt="Modified Image" />
 </p>
 {% endif %}
 
