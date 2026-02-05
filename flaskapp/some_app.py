@@ -93,7 +93,7 @@ def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
                 y_end = min(y_end, height)
                 x_end = min(x_end, width)
 
-                modified_image_data[y_start:y_end, x_start:x_end, :] = black_color
+                modified_image_data[y_start:y_end, x_start:x_end, :] = [0, 0, 0]
                 
     return modified_image_data
 
