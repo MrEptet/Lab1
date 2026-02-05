@@ -68,18 +68,18 @@ def create_histogram(image_data, filename, title):
     plt.close()
 
 def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
+    
     modified_image_data = image_data.copy().astype(image_data.dtype)
-    # Определяем размер блока (block_size), а не "процент заполнения" от 255
+    
     if percentage == 0:
         return modified_image_data # Избегаем деления на ноль, если процент 0
+    # Получаем полные размеры изображения для итерации по всему массиву
+    height, width, channels = image_data.shape
     min_side = min(height, width)
     block_size = int(min_side * (percentage / 100.0))
     
     if block_size == 0:
         block_size = 1 # Гарантируем, что размер блока хотя бы 1 пиксель
-    
-    # Получаем полные размеры изображения для итерации по всему массиву
-    height, width = image_data.shape
     
     # Закрашиваем ячейки черным
     # Диапазоны циклов основаны на фактических размерах изображения и размере блока
