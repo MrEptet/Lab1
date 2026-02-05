@@ -1,17 +1,25 @@
 image:
-  - Visual Studio 2019
+- Visual Studio 2019
 
 install:
-  - ps: "Install-Product python 3.12 x64"
-  - ps: "set PATH=C:\\Python312-x64;C:\\Python312-x64\\Scripts;$env:PATH"
-  - pip install -r requirements.txt
-  - sh: chmod +x ./flaskapp/st.sh
+# Явно указываем AppVeyor использовать 64-битную версию Python 3.12, 
+# что должно устранить ошибку "package not found"
+- ps: "Install-Product python 3.12 x64"
+# Настройка переменной PATH с использованием 64-битного пути
+- ps: "set PATH=C:\\Python312-x64;C:\\Python312-x64\\Scripts;$env:PATH"
+# Обновляем pip как рекомендовано в логах
+- ps: "python.exe -m pip install --upgrade pip"
+# Установка зависимостей проекта
+- pip install -r requirements.txt
+# Делаем скрипт исполняемым
+- sh: chmod +x ./flaskapp/st.sh
 
 build: off
- 
+
 build_script:
-  - cd flaskapp
-  - sh: ./st.sh 
+- cd flaskapp
+- sh: ./st.sh
 
 after_build:
-  - curl -X POST https://api.render.com/deploy/srv-d60r5kali9vc73fg5q20?key=9jkAokrf_Lo
+# Убедитесь, что этот URL/ключ зашифрован в настройках AppVeyor
+- curl -X POST https://api.render.com/deploy/srv-d60r5kali9vc73fg5q20?key=9jkAokrf_Lo
