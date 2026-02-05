@@ -327,7 +327,7 @@ def create_histogram(image_data, filename, title):
 def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
     modified_image_data = image_data.copy()
     # Определяем процент заполнения
-    total = int(255 * (persent / 100.0))
+    total = int(255 * (percentage / 100.0))
     # Закрашиваем ячейки черным
     for i in range(255 // total):
      for j in range(255 // total):
