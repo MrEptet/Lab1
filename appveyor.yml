@@ -16,4 +16,4 @@ build_script:
  - sh: ./st.sh
 
 on_success:
- - cmd: curl.exe --% -X POST "%RENDER_DEPLOY_KEY%"
+ - ps: Invoke-WebRequest -Method POST -Uri "$env:RENDER_DEPLOY_KEY"
