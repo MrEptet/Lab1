@@ -75,25 +75,16 @@ def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
         return modified_image_data # Избегаем деления на ноль, если процент 0
     # Получаем полные размеры изображения для итерации по всему массиву
     height, width, channels = image_data.shape
-    min_side = min(height, width)
-    block_size = int(min_side * (percentage / 100.0))
+    total = int(255 * (percentage / 100.0))
     
-    if block_size == 0:
-        block_size = 1 # Гарантируем, что размер блока хотя бы 1 пиксель
+    if total == 0:
+        total = 1 # Гарантируем, что размер блока хотя бы 1 пиксель
     
     # Закрашиваем ячейки черным
-    # Диапазоны циклов основаны на фактических размерах изображения и размере блока
-    for i in range(height // block_size):
-        for j in range(width // block_size):
-            if (i + j) % 2 == 0:
-                y_start, y_end = i*block_size, (i+1)*block_size
-                x_start, x_end = j*block_size, (j+1)*block_size
-                
-                # Убедимся, что срезы не выходят за пределы изображения
-                y_end = min(y_end, height)
-                x_end = min(x_end, width)
-
-                modified_image_data[y_start:y_end, x_start:x_end, :] = [0, 0, 0]
+    for i in range(255 // total):
+     for j in range(255 // total):
+      if (i + j) % 2 == 0:
+       modified_image_data[0, i*total: (i+1)*total, j*total: (j+1)*total, :] *= 0.01
                 
     return modified_image_data
 
