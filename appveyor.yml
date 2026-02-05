@@ -1,5 +1,7 @@
+python.exe -m pip install --upgrade pip
+
 image:
-  - Visual Studio 2019
+  - Visual Studio 2022
 
 install:
   - ps: "Install-Product python 3.12 x64"
