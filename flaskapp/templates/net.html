@@ -21,16 +21,17 @@
 
 <h2>Image is here: </h2>
 
-<!-- Отображаем загруженное изображение с закругленными углами, если оно есть (после submit) -->
-{% if image_name %}
-<p>{{image_name}}</p>
-<p><img src="{{ url_for('static', filename=image_name.split('./static/')[-1]) }}"
-class="img-rounded"
-alt="My Image"
-width= 224
-height=224 />
+<!-- Используем image_url для формирования правильного веб-адреса -->
+{% if image_url %}
+<p>{{image_name}}</p> <!-- image_name все еще содержит полный путь для информации -->
+<p>
+  <img src="{{ url_for('static', filename=image_url) }}" 
+       class="img-rounded"
+       alt="My Image"
+       width= 224
+       height=224 />
+</p>
 {% else %}
 <p> There is no image yet </p>
-{% endif %} <!-- <-- И ЭТОТ ТЕГ ТОЖЕ ЗДЕСЬ -->
-
+{% endif %}
 {% endblock %}
