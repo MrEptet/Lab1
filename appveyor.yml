@@ -15,6 +15,5 @@ build_script:
  - cd flaskapp
  - sh: ./st.sh
 
-
-after_build:
- - curl -H "Authorization: token ${GITHUB_STATUS_TOKEN}" -X POST "https://api.github.com{APPVEYOR_REPO_NAME}/statuses/${APPVEYOR_REPO_COMMIT}?description=AppVeyor%20Build%20Passed&context=ci/appveyor/build&state=success"
+on_success:
+  - ps: "curl -X POST %RENDER_DEPLOY_HOOK%"
