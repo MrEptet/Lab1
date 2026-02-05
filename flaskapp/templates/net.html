@@ -1,37 +1,50 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-<!-- Задаем заголовок страницы -->
-{% block title %} This is an page{% endblock %}
+<!-- ... (блок title) ... -->
 
 <!-- Блок body -->
 {% block content %}
+<!-- Форма теперь содержит поле percentage -->
 {{ wtf.quick_form(form, method='post', enctype="multipart/form-data", action="net") }}
 
-<!-- Один из стандартных тегов html заголовок второго уровня -->
-<h2>Classes: </h2>
+<!-- ... (блок Classes) ... -->
 
-<!-- Проверяем, есть ли какие-либо результаты обработки, и выводим их -->
-{% if neurodic and neurodic.items() %}
-<!-- Запускаем цикл прохода по словарю и отображаем ключ-значение доступных данных -->
-{% for key, value in neurodic.items() %}
-<h3>{{key}}: {{value}}</h3>
-{% endfor %}
-{% endif %} <!-- <-- ВОТ ЭТОТ ТЕГ ДОЛЖЕН БЫТЬ ТУТ -->
+<h2>Original Image: </h2>
 
-<h2>Image is here: </h2>
-
-<!-- Используем image_url для формирования правильного веб-адреса -->
+<!-- Отображаем исходное изображение -->
 {% if image_url %}
-<p>{{image_name}}</p> <!-- image_name все еще содержит полный путь для информации -->
+<p>{{image_name}}</p> 
 <p>
   <img src="{{ url_for('static', filename=image_url) }}" 
        class="img-rounded"
-       alt="My Image"
+       alt="Original Image"
        width= 224
        height=224 />
 </p>
 {% else %}
 <p> There is no image yet </p>
 {% endif %}
+
+<!-- Добавляем секцию для измененного изображения -->
+<h2>Modified Image: </h2>
+{% if modified_url %}
+<p>
+  <img src="{{ modified_url }}" 
+       class="img-rounded"
+       alt="Modified Image"
+       width= 224
+       height=224 />
+</p>
+{% endif %}
+
+<!-- Добавляем секции для графиков -->
+<h2>Color Distributions:</h2>
+{% if original_plot_url and modified_plot_url %}
+<h3>Original Histogram:</h3>
+<img src="{{ original_plot_url }}" alt="Original Image Histogram" />
+<h3>Modified Histogram:</h3>
+<img src="{{ modified_plot_url }}" alt="Modified Image Histogram" />
+{% endif %}
+
 {% endblock %}
