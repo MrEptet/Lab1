@@ -325,41 +325,14 @@ def create_histogram(image_data, filename, title):
     plt.close()
 
 def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
-    """
-    Применяет маску в виде сетки 4x6 к изображению NumPy, закрашивая 
-    процент ячеек случайным образом.
-
-    :param image_data: Исходное изображение в виде массива NumPy (H, W, C).
-    :param percentage: Процент ячеек, которые должны быть закрашены черным (0-100).
-    :return: Изображение с примененной маской.
-    """
-    h, w, c = image_data.shape
-    
-    # Жестко задаем количество строк и столбцов по вашему примеру (4 ряда, 6 колонок)
-    rows = 4
-    cols = 6
-    cell_h = h // rows
-    cell_w = w // cols
-    total_cells = rows * cols
-
     modified_image_data = image_data.copy()
-
-    # Создаем список всех индексов ячеек и перемешиваем их
-    all_cell_indices = [(i, j) for i in range(rows) for j in range(cols)]
-    random.shuffle(all_cell_indices)
-
-    # Определяем количество ячеек для закрашивания на основе процента
-    cells_to_mask_count = int((percentage / 100.0) * total_cells)
-    cells_to_mask = all_cell_indices[:cells_to_mask_count]
-
-    # Закрашиваем выбранные ячейки черным
-    for i, j in cells_to_mask:
-        y1 = i * cell_h
-        y2 = (i + 1) * cell_h
-        x1 = j * cell_w
-        x2 = (j + 1) * cell_w
-        # Заполнение черным цветом для RGB
-        modified_image_data[y1:y2, x1:x2] = [0, 0, 0]
+    # Определяем процент заполнения
+    total = int(255 * (persent / 100.0))
+    # Закрашиваем ячейки черным
+    for i in range(255 // total):
+     for j in range(255 // total):
+      if (i + j) % 2 == 0:
+       modified_image_data[0, i*total: (i+1)*total, j*total: (j+1)*total, :] = [0, 0, 0]
             
     return modified_image_data
 
