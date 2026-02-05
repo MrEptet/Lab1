@@ -1,3 +1,4 @@
+'''
 # модули работы с формами и полями в формах
 from flask_wtf import FlaskForm,RecaptchaField
 from wtforms import StringField, SubmitField, TextAreaField
@@ -129,3 +130,42 @@ def apixml():
  #преобразуем из памяти dom в строку, возможно, понадобится указать кодировку
  strfile = ET.tostring(newhtml)
  return strfile 
+'''
+
+import random
+import os
+# модуль работы с изображениями
+from PIL import Image
+import numpy as np
+
+# Конфигурация GPU, Keras и TensorFlow удалены
+
+height = 224
+width = 224
+
+# чтение изображений из каталога
+def read_image_files(files_max_count,dir_name):
+  files = os.listdir(dir_name)
+  files_count = files_max_count
+  if(files_max_count>len(files)): # определяем количество файлов не больше max
+   files_count = len(files)
+  image_box = [[]]*files_count
+  for file_i in range(files_count): # читаем изображения в список
+    full_path = os.path.join(dir_name, files[file_i])
+    img = Image.open(full_path)
+    img.load() # Принудительно загружаем данные в память
+    image_box[file_i] = img
+  return files_count, image_box
+  
+def getResult(image_box):
+  files_count = len(image_box)
+  images_resized = [[]]*files_count
+  # нормализуем изображения и преобразуем в numpy
+  for i in range(files_count):
+   # Преобразование в numpy массив и нормализация до диапазона [0.0, 1.0]
+   images_resized[i] = np.array(image_box[i].resize((height,width)))/255.0
+  images_resized = np.array(images_resized)
+  
+  # Код, связанный с нейросетью (resnet.predict и decode_predictions), удален.
+  # Функция теперь возвращает numpy-массив изображений
+  return images_resized
