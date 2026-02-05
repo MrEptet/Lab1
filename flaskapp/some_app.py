@@ -141,6 +141,9 @@ def net():
         # 3. Генерируем графики
         create_histogram(original_image_np, 'original_hist.png', 'Original Image Color Distribution')
         create_histogram(modified_image_np, 'modified_hist.png', 'Modified Image Color Distribution')
+
+        print(f"DEBUG INFO: modified_image_np shape: {modified_image_np.shape}", flush=True)
+        print(f"DEBUG INFO: modified_image_np dtype: {modified_image_np.dtype}", flush=True)
         
         original_plot_url = url_for('static', filename='original_hist.png')
         modified_plot_url = url_for('static', filename='modified_hist.png')
