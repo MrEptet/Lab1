@@ -16,4 +16,4 @@ build_script:
  - sh: ./st.sh
 
 on_success:
- - cmd: curl.exe --% -X POST "%RENDER_DEPLOY_HOOK%"
+ - cmd: curl.exe --% -X POST "%RENDER_DEPLOY_KEY%"
