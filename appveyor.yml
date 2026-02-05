@@ -2,15 +2,7 @@ image:
 - Visual Studio 2019
 
 install:
-# Используем надежный метод установки от AppVeyor, который должен работать
-- ps: "Install-Product python 3.12 x64"
-# Используем синтаксис PowerShell для добавления путей в переменную окружения PATH
-- ps: "$env:Path = 'C:\\Python312-x64\\Scripts;' + 'C:\\Python312-x64;' + $env:Path"
-# Обновляем pip как рекомендовано в логах
-- ps: "python.exe -m pip install --upgrade pip"
-# Установка зависимостей проекта (теперь она должна использовать 64-битный pip)
 - pip install -r requirements.txt
-# Делаем скрипт исполняемым
 - sh: chmod +x ./flaskapp/st.sh
 
 build: off
