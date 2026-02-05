@@ -2,7 +2,6 @@ image:
 - Visual Studio 2019
 
 install:
-install:
 # 1. Загружаем 64-битный установщик Python 3.12.0 с помощью curl/Invoke-WebRequest
 # Используем ОФИЦИАЛЬНЫЙ и ПРЯМОЙ URL-адрес файла MSI
 - ps: "Invoke-WebRequest -Uri https://www.python.org -OutFile C:\\python_installer.msi"
