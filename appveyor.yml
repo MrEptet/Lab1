@@ -16,4 +16,4 @@ build_script:
 - sh: ./st.sh
 
 after_build:
-- curl -X POST https://api.render.com%RENDER_DEPLOYMENT_KEY%
+- curl.exe -X POST https://api.render.com%RENDER_DEPLOYMENT_KEY%
