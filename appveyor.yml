@@ -2,7 +2,7 @@ image:
  - Visual Studio 2019
 
 install:
- - ps: "Invoke-WebRequest -Uri https://www.python.org -OutFile C:\\python_installer.msi"
+  - ps: "Invoke-WebRequest -Uri https://www.python.org -OutFile C:\\python_installer.msi"
   - ps: "msiexec.exe /i C:\\python_installer.msi /qn ALLUSERS=1 TARGETDIR=C:\\Python312-x64"
   - ps: "$env:Path = 'C:\\Python312-x64\\Scripts;' + 'C:\\Python312-x64;' + $env:Path"
   - ps: "python.exe -m pip install --upgrade pip"
