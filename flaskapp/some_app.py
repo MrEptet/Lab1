@@ -83,20 +83,20 @@ def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
         return image_data # Гарантируем, что размер блока хотя бы 1 пиксель
     
     # Закрашиваем ячейки черным
-     for i in range(height // total + 1): # Добавляем +1 на случай неполного покрытия
-        for j in range(width // total + 1):
-            if (i + j) % 2 == 0:
-                # Безопасно определяем конечные индексы с помощью min()
-                y_start = i * total
-                y_end = min(y_start + total, height) # Ограничиваем высоту
-                x_start = j * total
-                x_end = min(x_start + total, width) # Ограничиваем ширину
+    for i in range(height // total + 1): # Добавляем +1 на случай неполного покрытия
+     for j in range(width // total + 1):
+      if (i + j) % 2 == 0:
+       # Безопасно определяем конечные индексы с помощью min()
+       y_start = i * total
+       y_end = min(y_start + total, height) # Ограничиваем высоту
+       x_start = j * total
+       x_end = min(x_start + total, width) # Ограничиваем ширину
 
-                # Проверяем, что срез не пустой перед присваиванием
-                if y_start < y_end and x_start < x_end:
-                    # Присваиваем черный цвет [0, 0, 0]
-                    # Убедитесь, что массив цвета соответствует типу данных изображения (float или int)
-                    modified_image_data[y_start:y_end, x_start:x_end] = [0.0, 0.0, 0.0]
+       # Проверяем, что срез не пустой перед присваиванием
+       if y_start < y_end and x_start < x_end:
+        # Присваиваем черный цвет [0, 0, 0]
+        # Убедитесь, что массив цвета соответствует типу данных изображения (float или int)
+        modified_image_data[y_start:y_end, x_start:x_end] = [0.0, 0.0, 0.0]
                 
     return modified_image_data
 
