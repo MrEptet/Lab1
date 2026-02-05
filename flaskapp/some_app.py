@@ -72,19 +72,29 @@ def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
     # Определяем размер блока (block_size), а не "процент заполнения" от 255
     if percentage == 0:
         return modified_image_data # Избегаем деления на ноль, если процент 0
-    block_size = int(255 * (percentage / 100.0))
+    min_side = min(height, width)
+    block_size = int(min_side * (percentage / 100.0))
+    
+    if block_size == 0:
+        block_size = 1 # Гарантируем, что размер блока хотя бы 1 пиксель
     
     # Получаем полные размеры изображения для итерации по всему массиву
-    height, width, channels = image_data.shape
+    height, width = image_data.shape
     
     # Закрашиваем ячейки черным
     # Диапазоны циклов основаны на фактических размерах изображения и размере блока
     for i in range(height // block_size):
         for j in range(width // block_size):
             if (i + j) % 2 == 0:
-                modified_image_data[i*block_size: (i+1)*block_size, 
-                                  j*block_size: (j+1)*block_size, :] = [0, 0, 0]
-            
+                y_start, y_end = i*block_size, (i+1)*block_size
+                x_start, x_end = j*block_size, (j+1)*block_size
+                
+                # Убедимся, что срезы не выходят за пределы изображения
+                y_end = min(y_end, height)
+                x_end = min(x_end, width)
+
+                modified_image_data[y_start:y_end, x_start:x_end, :] = black_color
+                
     return modified_image_data
 
 # --- Маршруты приложения Flask ---
