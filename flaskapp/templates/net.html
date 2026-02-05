@@ -15,21 +15,22 @@
 {% if neurodic and neurodic.items() %}
 <!-- Запускаем цикл прохода по словарю и отображаем ключ-значение доступных данных -->
 {% for key, value in neurodic.items() %}
- <h3>{{key}}: {{value}}</h3>
+<h3>{{key}}: {{value}}</h3>
 {% endfor %}
-
+{% endif %} <!-- <-- ВОТ ЭТОТ ТЕГ ДОЛЖЕН БЫТЬ ТУТ -->
 
 <h2>Image is here: </h2>
 
 <!-- Отображаем загруженное изображение с закругленными углами, если оно есть (после submit) -->
 {% if image_name %}
- <p>{{image_name}}</p>
- <p><img src="{{ url_for('static', filename=image_name.split('./static/')[-1]) }}"
-                 class="img-rounded"
-                 alt="My Image"
-                 width= 224
-                 height=224 />
+<p>{{image_name}}</p>
+<p><img src="{{ url_for('static', filename=image_name.split('./static/')[-1]) }}"
+class="img-rounded"
+alt="My Image"
+width= 224
+height=224 />
 {% else %}
- <p> There is no image yet </p>
-{% endif %}
+<p> There is no image yet </p>
+{% endif %} <!-- <-- И ЭТОТ ТЕГ ТОЖЕ ЗДЕСЬ -->
+
 {% endblock %}
