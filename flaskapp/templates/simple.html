@@ -1,5 +1,23 @@
 <html>
  <head>
+  <meta name="color-scheme" content="dark light"> 
+    <style>
+        body {
+            /* Dark background color */
+            background-color: #121212; 
+            /* Light text color for contrast */
+            color: #ffffff; 
+            font-family: sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #e0e0e0; /* Slightly lighter color for headings */
+        }
+        p {
+            line-height: 1.5;
+        }
+    </style>
  {% if some_str %}
  <title>{{ some_str }} </title>
  {% else %}
@@ -8,6 +26,7 @@
  </head>
  <body>
  <h1 style="color:{{ some_pars.color }};">Hello, {{ some_pars.user }}!</h1>
+ <a href="https://lab1-o0qe.onrender.com/net">Net page</a>
  <h2>some_value {{ some_value }}!</h2>
  </body>
 </html> 
