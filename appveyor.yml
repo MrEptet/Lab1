@@ -1,19 +1,19 @@
 image:
-- Visual Studio 2019
+ - Visual Studio 2019
 
 install:
-- ps: "Invoke-WebRequest -Uri https://www.python.org -OutFile C:\\python_installer.msi"
-- ps: "msiexec.exe /i C:\\python_installer.msi /qn ALLUSERS=1 TARGETDIR=C:\\Python312-x64"
-- ps: "$env:Path = 'C:\\Python312-x64\\Scripts;' + 'C:\\Python312-x64;' + $env:Path"
-- ps: "python.exe -m pip install --upgrade pip"
-- pip install -q -r requirements.txt
-- sh: chmod +x ./flaskapp/st.sh
+ - ps: "Invoke-WebRequest -Uri https://www.python.org -OutFile C:\\python_installer.msi"
+  - ps: "msiexec.exe /i C:\\python_installer.msi /qn ALLUSERS=1 TARGETDIR=C:\\Python312-x64"
+  - ps: "$env:Path = 'C:\\Python312-x64\\Scripts;' + 'C:\\Python312-x64;' + $env:Path"
+  - ps: "python.exe -m pip install --upgrade pip"
+  - pip install -q -r requirements.txt
+  - sh: chmod +x ./flaskapp/st.sh
 
 build: off
 
 build_script:
-- cd flaskapp
-- sh: ./st.sh
+ - cd flaskapp
+ - sh: ./st.sh
 
 after_build:
-- sh: curl -H "Authorization: token ${GITHUB_STATUS_TOKEN}" -X POST "https://api.github.com{APPVEYOR_REPO_NAME}/statuses/${APPVEYOR_REPO_COMMIT}?description=AppVeyor%20Build%20Passed&context=ci/appveyor/build&state=success"
+ - sh: curl -H "Authorization: token ${GITHUB_STATUS_TOKEN}" -X POST "https://api.github.com{APPVEYOR_REPO_NAME}/statuses/${APPVEYOR_REPO_COMMIT}?description=AppVeyor%20Build%20Passed&context=ci/appveyor/build&state=success"
