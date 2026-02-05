@@ -69,13 +69,21 @@ def create_histogram(image_data, filename, title):
 
 def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
     modified_image_data = image_data.copy()
-    # Определяем процент заполнения
-    total = int(255 * (percentage / 100.0))
+    # Определяем размер блока (block_size), а не "процент заполнения" от 255
+    if percentage == 0:
+        return modified_image_data # Избегаем деления на ноль, если процент 0
+    block_size = int(255 * (percentage / 100.0))
+    
+    # Получаем полные размеры изображения для итерации по всему массиву
+    height, width, channels = image_data.shape
+    
     # Закрашиваем ячейки черным
-    for i in range(255 // total):
-     for j in range(255 // total):
-      if (i + j) % 2 == 0:
-       modified_image_data[i*total: (i+1)*total, j*total: (j+1)*total, :] = [0, 0, 0]
+    # Диапазоны циклов основаны на фактических размерах изображения и размере блока
+    for i in range(height // block_size):
+        for j in range(width // block_size):
+            if (i + j) % 2 == 0:
+                modified_image_data[i*block_size: (i+1)*block_size, 
+                                  j*block_size: (j+1)*block_size, :] = [0, 0, 0]
             
     return modified_image_data
 
