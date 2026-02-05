@@ -324,34 +324,42 @@ def create_histogram(image_data, filename, title):
     plt.savefig(filepath)
     plt.close()
 
-def apply_checkerboard(image_data, percentage):
-    """Перекрашивает изображение в шахматную сетку с заданным процентом заполнения."""
-    img_height, img_width, _ = image_data.shape
+def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
+    """
+    Применяет маску в виде сетки 4x6 к изображению NumPy, закрашивая 
+    процент ячеек случайным образом.
+
+    :param image_data: Исходное изображение в виде массива NumPy (H, W, C).
+    :param percentage: Процент ячеек, которые должны быть закрашены черным (0-100).
+    :return: Изображение с примененной маской.
+    """
+    h, w, c = image_data.shape
+    
+    # Жестко задаем количество строк и столбцов по вашему примеру (4 ряда, 6 колонок)
+    rows = 4
+    cols = 6
+    cell_h = h // rows
+    cell_w = w // cols
+    total_cells = rows * cols
+
     modified_image_data = image_data.copy()
-    
-    # Определяем общее количество пикселей, которые нужно закрасить
-    total_pixels = img_height * img_width
-    pixels_to_change = int((percentage / 100.0) * total_pixels)
-    
-    # Генерируем случайные индексы пикселей для изменения
-    # Выбираем случайные индексы, чтобы не просто закрасить верхнюю часть
-    flat_indices = np.arange(total_pixels)
-    np.random.shuffle(flat_indices)
-    indices_to_change = flat_indices[:pixels_to_change]
 
-    # Преобразуем плоские индексы обратно в 2D координаты
-    y_coords = indices_to_change // img_width
-    x_coords = indices_to_change % img_width
+    # Создаем список всех индексов ячеек и перемешиваем их
+    all_cell_indices = [(i, j) for i in range(rows) for j in range(cols)]
+    random.shuffle(all_cell_indices)
 
-    # Применяем шахматный узор к выбранным пикселям
-    # Цвет зависит от четности суммы координат (для узора 1х1 пиксель)
-    for y, x in zip(y_coords, x_coords):
-        if (x + y) % 2 == 0:
-            # Цвет 1 (например, белый)
-            modified_image_data[y, x] = [255, 255, 255] 
-        else:
-            # Цвет 2 (например, черный)
-            modified_image_data[y, x] = [0, 0, 0]
+    # Определяем количество ячеек для закрашивания на основе процента
+    cells_to_mask_count = int((percentage / 100.0) * total_cells)
+    cells_to_mask = all_cell_indices[:cells_to_mask_count]
+
+    # Закрашиваем выбранные ячейки черным
+    for i, j in cells_to_mask:
+        y1 = i * cell_h
+        y2 = (i + 1) * cell_h
+        x1 = j * cell_w
+        x2 = (j + 1) * cell_w
+        # Заполнение черным цветом для RGB
+        modified_image_data[y1:y2, x1:x2] = [0, 0, 0]
             
     return modified_image_data
 
