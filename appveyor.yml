@@ -16,4 +16,4 @@ build_script:
  - sh: ./st.sh
 
 on_success:
-  - ps: "curl -X POST %RENDER_DEPLOY_HOOK%"
+  - ps: Invoke-WebRequest -Method POST -Uri "$env:RENDER_DEPLOY_HOOK"
