@@ -2,15 +2,9 @@ image:
 - Visual Studio 2019
 
 install:
-# 1. Загружаем 64-битный установщик Python 3.12.0 с помощью curl/Invoke-WebRequest
-# Используем ОФИЦИАЛЬНЫЙ и ПРЯМОЙ URL-адрес файла MSI
 - ps: "Invoke-WebRequest -Uri https://www.python.org -OutFile C:\\python_installer.msi"
-# 2. Запускаем установщик в тихом режиме
 - ps: "msiexec.exe /i C:\\python_installer.msi /qn ALLUSERS=1 TARGETDIR=C:\\Python312-x64"
-# 3. Настройка переменной PATH (используем правильный синтаксис PowerShell и двойные обратные слеши)
-# Этот шаг критически важен, чтобы pip нашел новый 64-битный Python первым
 - ps: "$env:Path = 'C:\\Python312-x64\\Scripts;' + 'C:\\Python312-x64;' + $env:Path"
-# 4. Обновляем pip и устанавливаем зависимости проекта
 - ps: "python.exe -m pip install --upgrade pip"
 - pip install -r requirements.txt
 - sh: chmod +x ./flaskapp/st.sh
