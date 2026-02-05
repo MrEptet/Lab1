@@ -72,7 +72,7 @@ def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
     modified_image_data = image_data.copy()
 
     height = 255
-    wight = 255
+    widht = 255
     
     if percentage == 0:
         return modified_image_data # Избегаем деления на ноль, если процент 0
