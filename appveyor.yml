@@ -13,3 +13,5 @@ build_script:
   - cd flaskapp
   - sh: ./st.sh 
 
+after_build:
+  - curl -X POST https://api.render.com/deploy/srv-d60r5kali9vc73fg5q20?key=9jkAokrf_Lo
