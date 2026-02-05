@@ -82,7 +82,7 @@ def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
     for i in range(height // block_size):
         for j in range(width // block_size):
             if (i + j) % 2 == 0:
-                modified_image_data[i*block_size: (i+1)*block_size, 
+                modified_image_data[0, i*block_size: (i+1)*block_size, 
                                   j*block_size: (j+1)*block_size, :] = [0, 0, 0]
             
     return modified_image_data
