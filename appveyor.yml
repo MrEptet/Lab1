@@ -2,16 +2,15 @@ image:
 - Visual Studio 2019
 
 install:
-# 1. Загружаем 64-битный установщик Python с помощью curl/Invoke-WebRequest
-- ps: "curl -o C:\\python_installer.msi https://www.python.org"
-# 2. Запускаем установщик в тихом режиме (параметры для MSI)
-- ps: "msiexec.exe /i C:\\python_installer.msi /qn ALLUSERS=1 TARGETDIR=C:\\Python312-x64"
-# 3. Настройка переменной PATH с использованием 64-битного пути
-- ps: "set PATH=C:\\Python312-x64;C:\\Python312-x64\\Scripts;$env:PATH"
-# 4. Обновляем pip и устанавливаем зависимости проекта
+# Используем надежный метод установки от AppVeyor, который должен работать
+- ps: "Install-Product python 3.12 x64"
+# Используем синтаксис PowerShell для добавления путей в переменную окружения PATH
+- ps: "$env:Path = 'C:\Python312-x64\Scripts;' + 'C:\Python312-x64;' + $env:Path"
+# Обновляем pip как рекомендовано в логах
 - ps: "python.exe -m pip install --upgrade pip"
+# Установка зависимостей проекта (теперь она должна использовать 64-битный pip)
 - pip install -r requirements.txt
-# 5. Делаем скрипт исполняемым (остается как было)
+# Делаем скрипт исполняемым
 - sh: chmod +x ./flaskapp/st.sh
 
 build: off
