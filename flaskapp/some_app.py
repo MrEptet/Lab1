@@ -124,7 +124,7 @@ def net():
         
         # 1. Загружаем изображение и преобразуем в NumPy
         original_image = Image.open(filename).convert('RGB')
-        original_image_np = np.array(original_image)
+        original_image_np = np.array(original_image.resize((255, 255))) / 255.0
 
         # 2. Создаем измененное изображение
         modified_image_np = apply_checkerboard(original_image_np, percentage)
