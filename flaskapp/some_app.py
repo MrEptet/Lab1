@@ -185,28 +185,29 @@ def net():
  form = NetForm()
  # обнуляем переменные, передаваемые в форму
  filename=None
- neurodic = None # Инициализация как None, чтобы шаблон знал, что данных пока нет
+ relative_filename=None # <-- Добавлена новая переменная
+ neurodic = None 
 
  # проверяем нажатие сабмит и валидацию введенных данных
  if form.validate_on_submit():
-  # файлы с изображениями читаются из каталога static
   base_dir = os.path.dirname(os.path.abspath(__file__))
   static_path = os.path.join(base_dir, 'static')
   
-  filename = os.path.join(static_path, secure_filename(form.upload.data.filename))
- 
-  # Логика нейросети полностью удалена.
-  # Вместо этого можно добавить другую логику обработки файла или просто сохранить его.
+  # Генерируем безопасное имя файла
+  simple_filename = secure_filename(form.upload.data.filename)
   
+  # Формируем полный путь для сохранения
+  filename = os.path.join(static_path, simple_filename)
+ 
+  # Формируем относительный путь для веба (только имя файла)
+  relative_filename = simple_filename # <-- Используем только имя файла
+
   # Сохраняем загруженный файл
   form.upload.data.save(filename)
   
-  # В этом месте neurodic остается None, если вы не добавите другую логику
-
- # передаем форму в шаблон, так же передаем имя файла и результат работы 
- # (neurodic будет None при GET-запросе или после обработки без результатов)
+ # Передаем в шаблон относительный путь вместо полного filename
  gc.collect()
- return render_template('net.html',form=form,image_name=filename,neurodic=neurodic) 
+ return render_template('net.html',form=form, image_name=filename, image_url=relative_filename, neurodic=neurodic) 
 
 from flask import request
 # метод для обработки запроса от пользователя
