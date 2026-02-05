@@ -96,7 +96,7 @@ def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
        if y_start < y_end and x_start < x_end:
         # Присваиваем черный цвет [0, 0, 0]
         # Убедитесь, что массив цвета соответствует типу данных изображения (float или int)
-        modified_image_data[y_start:y_end, x_start:x_end] = [0.0, 0.0, 0.0]
+        modified_image_data[y_start:y_end, x_start:x_end, :] = [0.0, 0.0, 0.0]
                 
     return modified_image_data
 
