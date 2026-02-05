@@ -129,7 +129,8 @@ def net():
 
         # 2. Создаем измененное изображение
         modified_image_np = apply_checkerboard(original_image_np, percentage)
-        modified_image = Image.fromarray((modified_image_np*255)astype(np.unit8), 'RGB')
+        modified_image_unit8 = (modified_image_np * 255).astype(np.unit8)
+        modified_image = Image.fromarray((modified_image_unit8, 'RGB')
         
         # Сохраняем измененное изображение
         modified_simple_filename = "modified_" + simple_filename
