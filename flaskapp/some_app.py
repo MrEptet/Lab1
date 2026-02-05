@@ -69,22 +69,34 @@ def create_histogram(image_data, filename, title):
 
 def apply_checkerboard(image_data: np.ndarray, percentage: int) -> np.ndarray:
     
-    modified_image_data = image_data.copy().astype(image_data.dtype)
+    modified_image_data = image_data.copy()
+
+    height = 255
+    wight = 255
     
     if percentage == 0:
         return modified_image_data # Избегаем деления на ноль, если процент 0
-    # Получаем полные размеры изображения для итерации по всему массиву
-    height, width, channels = image_data.shape
-    total = int(255 * (percentage / 100.0))
+
+    total = int(height * (percentage / 100.0))
     
     if total == 0:
-        total = 1 # Гарантируем, что размер блока хотя бы 1 пиксель
+        return image_data # Гарантируем, что размер блока хотя бы 1 пиксель
     
     # Закрашиваем ячейки черным
-    for i in range(255 // total):
-     for j in range(255 // total):
-      if (i + j) % 2 == 0:
-       modified_image_data[0, i*total: (i+1)*total, j*total: (j+1)*total] = [0, 0, 0]
+     for i in range(height // total + 1): # Добавляем +1 на случай неполного покрытия
+        for j in range(width // total + 1):
+            if (i + j) % 2 == 0:
+                # Безопасно определяем конечные индексы с помощью min()
+                y_start = i * total
+                y_end = min(y_start + total, height) # Ограничиваем высоту
+                x_start = j * total
+                x_end = min(x_start + total, width) # Ограничиваем ширину
+
+                # Проверяем, что срез не пустой перед присваиванием
+                if y_start < y_end and x_start < x_end:
+                    # Присваиваем черный цвет [0, 0, 0]
+                    # Убедитесь, что массив цвета соответствует типу данных изображения (float или int)
+                    modified_image_data[y_start:y_end, x_start:x_end] = [0.0, 0.0, 0.0]
                 
     return modified_image_data
 
