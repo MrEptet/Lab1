@@ -19,8 +19,8 @@ from tensorflow.compat.v1 import InteractiveSession
 #config.gpu_options.per_process_gpu_memory_fraction = 0.7
 #config.gpu_options.allow_growth = True
 #session = InteractiveSession(config=config)
-#height = 224
-#width = 224
+height = 224
+width = 224
 #nh=224
 #nw=224
 #ncol=3
@@ -42,9 +42,7 @@ def read_image_files(files_max_count,dir_name):
     full_path = os.path.join(dir_name, files[file_i])
     img = Image.open(full_path)
     img.load()
-    image_box.append(img)
     image_box[file_i] = img
-    img.close()
    #image_box[file_i] = Image.open(dir_name+'/'+files[file_i])
   return files_count, image_box
   
